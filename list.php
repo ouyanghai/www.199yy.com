@@ -5,10 +5,9 @@ $sql="delete from `tg_yangsheng` where id in (select * from (select max(id) from
 mysql_query($sql);exit;
 */
 
-$type=!empty($_GET['type'])?$_GET['type']:'bjsp';
+$ctype=!empty($_GET['type'])?$_GET['type']:'bjsp';
 
-$ctype = '';
-switch ($type) {
+switch ($ctype) {
     case 'jkss':
         $ctype="ctype='jkss' or ctype='fj' or ctype='sf' or ctype='xj'";
         break;
@@ -22,7 +21,7 @@ switch ($type) {
         $ctype="ctype='hwzb' or ctype='hwgl' or ctype='tj'";
         break;
     default:
-        # code...
+        $ctype="ctype='{$ctype}'";
         break;
 }
 
