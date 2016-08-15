@@ -8,8 +8,8 @@ $row = mysql_fetch_assoc($res);
 <div class="main clearfix">
 	<!--文章定位-->
     <div class="position">
-    	<a href="http://www.iyangsheng.com"  target="_blank"><img src="http://www.iyangsheng.com/templates/images/sub/logo_s.png" /></a>
-    	<span><a href="http://www.iyangsheng.com"  target="_blank">爱养生</a>><a ><?php echo $row['title'] ?></a></span>
+    	<a href="http://www.199yy.com"  target="_blank"><img src="http://www.iyangsheng.com/templates/images/sub/logo_s.png" /></a>
+    	<span><a href="http://www.199yy.com"  target="_blank">养生吧</a>><a ><?php echo $row['title'] ?></a></span>
     </div>
     <!--主要内容左半部分-->
     <div style="width:640px;">

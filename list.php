@@ -1,22 +1,48 @@
 <?php 
 include("./header.php"); 
-//$sql="delete from `tg_yangsheng` where id in (select * from (select max(id) from `tg_yangsheng` group by ctime having count(ctime)>1)as b)";
+/*
+$sql="delete from `tg_yangsheng` where id in (select * from (select max(id) from `tg_yangsheng` group by ctime having count(ctime)>1)as b)";
+mysql_query($sql);exit;
+*/
+
 $type=!empty($_GET['type'])?$_GET['type']:'bjsp';
+
+$ctype = '';
+switch ($type) {
+    case 'jkss':
+        $ctype="ctype='jkss' or ctype='fj' or ctype='sf' or ctype='xj'";
+        break;
+    case 'ws' :
+        $ctype="ctype='hwzb' or ctype='qg' or ctype='rq' ";
+        break;
+    case 'yujia':
+        $ctype="ctype='hwzb' or ctype='fx' or ctype='sb' or ctype='sl' or ctype='sy' or ctype='tt' ";
+        break;
+    case 'hwzb':
+        $ctype="ctype='hwzb' or ctype='hwgl' or ctype='tj'";
+        break;
+    default:
+        # code...
+        break;
+}
+
 $p_no = 10;
-$nres = mysql_query("select count(id) from `tg_yangsheng` where ctype='{$type}'");
+$nsql = "select count(id) from `tg_yangsheng` where {$ctype}";
+//echo $nsql;exit;
+$nres = mysql_query("select count(id) from `tg_yangsheng` where {$ctype}");
 $prow = mysql_fetch_row($nres);
 $size = $prow[0];
 $pages = ceil($size/$p_no);
 $cur_page = (!empty($_GET['page'])&&is_numeric($_GET['page']))?($_GET['page']>=1&& $_GET['page']<=$pages ? $_GET['page'] : 1):1;
 $p_start = ($cur_page-1)*$p_no;
-$lres = mysql_query("select * from `tg_yangsheng` where ctype='{$type}' order by ctime desc limit {$p_start},{$p_no}");
+$lres = mysql_query("select * from `tg_yangsheng` where {$ctype} order by ctime desc limit {$p_start},{$p_no}");
 
 $rres = mysql_query("select id,title,pic,ctime from `tg_yangsheng` where is_pic=1 limit 5");
 ?>
 <link rel="stylesheet" href="./css/list.css" />
 <div class="mainbox">
     <div class="breadnav">
-        <a href="./index.php">爱养生</a>
+        <a href="./index.php">养生吧</a>
     </div>
     <div class="leftbox" style="margin-top:10px">
         <div class="fl terminal_holder"><!--articel end-->
@@ -85,7 +111,7 @@ $rres = mysql_query("select id,title,pic,ctime from `tg_yangsheng` where is_pic=
         <div class="right_paih_b" style="margin-top:10px">
             <span class="temar3">
               热门观点
-              <!--<a href="http://www.iyangsheng.com/ph/" class="more" target="_blank">更多>></a>-->
+              
             </span>
             <?php while($rrow=mysql_fetch_assoc($rres)){ ?>
         		<div class="right_xiao">

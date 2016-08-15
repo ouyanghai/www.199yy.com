@@ -269,5 +269,5 @@ $res7 = mysql_query("select id,title from `tg_yangsheng` where ctype='blbj' limi
 	<a target="_blank" href="http://www.51yangsheng.com/" title="51养生网">51养生网</a>
 	<a target="_blank" href="http://www.qiuyi.cn/" title="求医">求医</a>
 	<a target="_blank" href="http://pic.iyangsheng.com/" title="美女写真">美女写真</a>
-	<a target="_blank" href="http://www.iyangsheng.com/templates/about/link.html" title="更多">更多</a>
+	a>
 </div>
